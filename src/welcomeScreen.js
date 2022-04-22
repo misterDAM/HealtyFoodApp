@@ -8,18 +8,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function App() {
+export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topSectionOfWelcomeScreen}>
         <Image
           style={styles.levetatingFruit}
-          source={require("./assets/levetatingFruit.png")}
+          source={require("../assets/levetatingFruit.png")}
         />
 
         <Image
           style={styles.welcomeScreenBasket}
-          source={require("./assets/welcomeScreenBasket.png")}
+          source={require("../assets/welcomeScreenBasket.png")}
         />
         <View style={styles.basketShadow} />
       </View>
@@ -39,7 +39,9 @@ export default function App() {
       </View>
       <View style={styles.theButtonView}>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("homeScreenOne");
+          }}
           activeOpacity={0.6}
           style={styles.button}
         >

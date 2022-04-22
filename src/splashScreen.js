@@ -1,15 +1,18 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
-export default function App() {
+export default function SplashScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("authenticationScreen")}
+      style={styles.container}
+    >
       <Image
         style={styles.splashIcon}
-        source={require("./assets/SplashScreenIcon.png")}
+        source={require("../assets/SplashScreenIcon.png")}
       />
       <StatusBar style="auto" />
-    </View>
+    </TouchableOpacity>
   );
 }
 

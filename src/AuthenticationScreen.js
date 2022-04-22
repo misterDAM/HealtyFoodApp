@@ -8,41 +8,45 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import Container from "./Container";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function App() {
+export default function AuthenticationScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.topSectionOfWelcomeScreen}>
-        <Image
-          style={styles.levetatingFruit}
-          source={require("./assets/levetatingFruit.png")}
-        />
+    <Container>
+      <View style={styles.container}>
+        <View style={styles.topSectionOfWelcomeScreen}>
+          <Image
+            style={styles.levetatingFruit}
+            source={require("../assets/levetatingFruit.png")}
+          />
 
-        <Image
-          style={styles.welcomeScreenBasket}
-          source={require("./assets/AuthenticationBasket.png")}
-        />
-        <View style={styles.basketShadow} />
-      </View>
-      <View>
-        <View style={styles.nameRequestView}>
-          <Text style={styles.nameRequestText}>What is your firstname?</Text>
+          <Image
+            style={styles.welcomeScreenBasket}
+            source={require("../assets/AuthenticationBasket.png")}
+          />
+          <View style={styles.basketShadow} />
         </View>
+        <View>
+          <View style={styles.nameRequestView}>
+            <Text style={styles.nameRequestText}>What is your firstname?</Text>
+          </View>
 
-        <View style={styles.nameInputView}>
-          <TextInput placeholder="Name" style={styles.nameInput} />
+          <View style={styles.nameInputView}>
+            <TextInput placeholder="Name" style={styles.nameInput} />
+          </View>
+        </View>
+        <View style={styles.StartOrderingButtonView}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("welcomeScreen")}
+            activeOpacity={0.6}
+            style={styles.button}
+          >
+            <Text style={styles.StartOrderingButton}>Sttart Ordering</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.StartOrderingButtonView}>
-        <TouchableOpacity
-          onPress={() => {}}
-          activeOpacity={0.6}
-          style={styles.button}
-        >
-          <Text style={styles.StartOrderingButton}>Sttart Ordering</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Container>
   );
 }
 

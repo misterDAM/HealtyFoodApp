@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -24,6 +25,12 @@ const FoodDisplaySection = [
 const catigories = ["Popular", "New combo", "Top"];
 
 export default function AddToBasketScreen({ navigation }) {
+  const [counter, setCounter] = useState(0);
+  let foodprice = () => {
+    this.setCounter({
+      foodprice: this.useState.counter + 1999,
+    });
+  };
   return (
     <Container>
       <View style={styles.container}>
@@ -53,20 +60,31 @@ export default function AddToBasketScreen({ navigation }) {
             </View>
             <View>
               <View style={styles.plusAndminusPrice}>
-                <ImageBackground
-                  style={styles.minusCrcleIMG}
-                  source={require("../assets/circuleHoldMinus.png")}
+                <TouchableOpacity
+                  onPress={() => {
+                    setCounter(counter - 1);
+                    console.log(counter);
+                  }}
                 >
-                  <View style={styles.minus} />
-                </ImageBackground>
-                <Text style={styles.numCount}>1</Text>
-                <View>
+                  <ImageBackground
+                    style={styles.minusCrcleIMG}
+                    source={require("../assets/circuleHoldMinus.png")}
+                  >
+                    <View style={styles.minus} />
+                  </ImageBackground>
+                </TouchableOpacity>
+                <Text style={styles.numCount}> {counter} </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setCounter(counter + 1);
+                  }}
+                >
                   <Image
                     style={styles.minusCrcleIMG}
                     source={require("../assets/AddPlus.png")}
                   />
-                </View>
-                <Text style={styles.priceStyling}>N 2,000</Text>
+                </TouchableOpacity>
+                <Text style={styles.priceStyling}> {foodprice} </Text>
               </View>
             </View>
             <View style={styles.foodDisscriptionTopic}>
@@ -179,6 +197,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "500",
     marginLeft: 119,
+    // position: "absolute",
   },
   foodDisscriptionTopic: {
     marginLeft: 24,

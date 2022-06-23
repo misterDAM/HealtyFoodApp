@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -18,6 +19,7 @@ const FoodDisplaySection = [
     nameOfmeal: "Honey Lime Combo",
     heart: require("../assets/heartLike.png"),
     addToCart: require("../assets/AddPlus.png"),
+    redHeart: require("../assets/Redheart.png"),
   },
   {
     foodIMG: require("../assets/GlowingBerryFruitSalad.png"),
@@ -25,6 +27,7 @@ const FoodDisplaySection = [
     nameOfmeal: "Berry mango Combo",
     heart: require("../assets/heartLike.png"),
     addToCart: require("../assets/AddPlus.png"),
+    redHeart: require("../assets/Redheart.png"),
   },
   {
     foodIMG: require("../assets/breakfastQuinoaAndRedFruitSalad.png"),
@@ -32,6 +35,7 @@ const FoodDisplaySection = [
     nameOfmeal: "Berry mango Combo",
     heart: require("../assets/heartLike.png"),
     addToCart: require("../assets/AddPlus.png"),
+    redHeart: require("../assets/Redheart.png"),
   },
 ];
 
@@ -62,6 +66,7 @@ const FoodDisplaySection2 = [
 ];
 
 export default function HomeScreenOne({ navigation }) {
+  const [isToggled, setToggled] = useState(true);
   return (
     <Container>
       <View style={styles.container}>
@@ -70,7 +75,10 @@ export default function HomeScreenOne({ navigation }) {
             <View style={styles.hamTop} />
             <View style={styles.hamButtom} />
           </View>
-          <View style={styles.cartView}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("myBucketView")}
+            style={styles.cartView}
+          >
             <Image
               style={styles.cartBasketImg}
               source={require("../assets/cartBasket.png")}
@@ -78,7 +86,7 @@ export default function HomeScreenOne({ navigation }) {
             <View>
               <Text style={styles.cartBasketText}>My basket</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.HelloNameTextView}>
           <Text style={styles.HelloNameText}>
@@ -110,10 +118,21 @@ export default function HomeScreenOne({ navigation }) {
           <Text style={styles.RecommendedComboText}>Recommended Combo</Text>
         </View>
         <View style={styles.parentScrollView}>
-          <ScrollView horizontal={true} style={styles.scroolView1}>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            style={styles.scroolView1}
+          >
             {FoodDisplaySection.map(
               (
-                { foodIMG, priceOFmeal, nameOfmeal, heart, addToCart },
+                {
+                  foodIMG,
+                  priceOFmeal,
+                  nameOfmeal,
+                  heart,
+                  redHeart,
+                  addToCart,
+                },
                 index
               ) => {
                 return (
@@ -123,7 +142,18 @@ export default function HomeScreenOne({ navigation }) {
                     style={styles.RecoViews}
                   >
                     <Image source={foodIMG} style={styles.FOODimg} />
-                    <Image source={heart} style={styles.heartImg} />
+                    <TouchableOpacity
+                      style={styles.heartChange}
+                      onPress={() => {
+                        setToggled(!isToggled);
+                      }}
+                    >
+                      <Image
+                        source={isToggled ? heart : redHeart}
+                        style={styles.heartImg}
+                      />
+                    </TouchableOpacity>
+
                     <Text style={styles.mealName}>{nameOfmeal}</Text>
                     <View style={styles.priceAndPlus}>
                       <Text style={styles.price}>{priceOFmeal}</Text>
@@ -151,7 +181,11 @@ export default function HomeScreenOne({ navigation }) {
         </View>
 
         <View style={styles.parentScrollView}>
-          <ScrollView horizontal={true} style={styles.scroolView1}>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            style={styles.scroolView1}
+          >
             {FoodDisplaySection2.map(
               (
                 { foodIMG, priceOFmeal, nameOfmeal, heart, addToCart },
@@ -297,11 +331,16 @@ const styles = StyleSheet.create({
     marginTop: 22,
     position: "absolute",
   },
+  heartChange: {
+    position: "absolute",
+    height: 25,
+    width: 25,
+  },
   heartImg: {
     height: 14.32,
     width: 16,
     top: 16,
-    right: 16,
+    right: 0,
     position: "absolute",
   },
   mealName: {
